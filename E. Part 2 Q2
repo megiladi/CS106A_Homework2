@@ -1,0 +1,23 @@
+# Attempt 1 - Candidly, I'm just as surprised that this worked... changed line 10 later to be general "filename"
+
+def make_channels(filename):
+    """
+    Given an image filename.
+    Creates an out image with 3x the width,
+    filled with the red, green, and blue channels
+    of the original image.
+    """
+    image = SimpleImage(filename)
+    # Specifying 'black' as the color for the blank image.
+    out = SimpleImage.blank(image.width * 3, image.height, back_color='black')
+    left = 0
+    top = 0
+    mode = 'red'
+    result_red = draw_image(image, out, left, top, mode)
+    left = image.width
+    mode = 'green'
+    result_red = draw_image(image, out, left, top, mode)
+    left = image.width*2
+    mode = 'blue'
+    result_red = draw_image(image, out, left, top, mode)
+    out.show()  # Show output on screen
