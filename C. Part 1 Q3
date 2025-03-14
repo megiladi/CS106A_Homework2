@@ -1,0 +1,61 @@
+# Attempt 2 - My first one I just forgot the return...
+
+def purple(filename, margin):
+    image = SimpleImage(filename)
+    # Create and return an out image the same size as the original image
+    out = SimpleImage.blank(image.width,image.height)
+    
+    # except with vertical stripes added at left and right (margin wide)
+    for y in range(image.height):
+        for x in range(margin):
+            pixel_out = out.get_pixel(x,y)
+            pixel_out.red = 255
+            pixel_out.green = 0
+            pixel_out.blue = 255
+    for y in range(image.height):
+        for x in range(image.width-margin,image.width):
+            pixel_out = out.get_pixel(x,y)
+            pixel_out.red = 255
+            pixel_out.green = 0
+            pixel_out.blue = 255
+            
+    # Copy the original image to the center + set margin areas to purple
+    for y in range (image.height):
+        for x in range (margin,image.width-margin):
+            pixel = image.get_pixel(x,y)
+            pixel_out = out.get_pixel (x,y)
+            pixel_out.red = pixel.red
+            pixel_out.green = pixel.green
+            pixel_out.blue = pixel.blue
+    return out
+
+# Attempt 3.5 - With lots of mini-iterations... added the 2nd margin on line 37, adjusted accordingly for lines 47 and 55; also updated line 56 to account for the margin offset in the for x vs. the desired image pixel
+
+def purple(filename, margin):
+    image = SimpleImage(filename)
+    # Create and return an out image the same size as the original image
+    out = SimpleImage.blank(image.width+2*margin,image.height)
+    
+    # except with vertical stripes added at left and right (margin wide)
+    for y in range(image.height):
+        for x in range(margin):
+            pixel_out = out.get_pixel(x,y)
+            pixel_out.red = 255
+            pixel_out.green = 0
+            pixel_out.blue = 255
+    for y in range(image.height):
+        for x in range(image.width+margin,image.width+2*margin):
+            pixel_out = out.get_pixel(x,y)
+            pixel_out.red = 255
+            pixel_out.green = 0
+            pixel_out.blue = 255
+            
+    # Copy the original image to the center + set margin areas to purple
+    for y in range (image.height):
+        for x in range (margin,image.width+margin):
+            pixel = image.get_pixel(x-margin,y)
+            pixel_out = out.get_pixel (x,y)
+            pixel_out.red = pixel.red
+            pixel_out.green = pixel.green
+            pixel_out.blue = pixel.blue
+    return out
