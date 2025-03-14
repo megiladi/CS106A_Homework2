@@ -1,0 +1,23 @@
+# Attempt 1 - I think I'm getting it slowly how this all works and scope and such...
+
+def make_art(filename, n):
+    """
+    Given an image filename, create an out
+    image and draw the channels on it as
+    described in the handout.
+    """
+    image = SimpleImage(filename)
+
+    # Create black image with 2 * n extra space
+    out = SimpleImage.blank(image.width + 2 * n, image.height + 2 * n, back_color='black')
+
+    # red at upper left
+    draw_image(image,out,0,0,'red')
+
+    # green at n to right and down
+    draw_image(image,out,n,n,'green')
+
+    # blue at 2n to right and down
+    draw_image(image,out,n*2,n*2,'blue')
+
+    out.show()  # Show output on screen
