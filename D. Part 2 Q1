@@ -1,0 +1,45 @@
+# After many attempts... learning how to use PyCharm IDE...
+
+def draw_image(image, out, left, top, mode):
+    """
+    Draw a copy of "image" into "out", with image's origin
+    at (left, top) within the out image.
+    Mode is one of 'red' 'green' 'blue' 'all',
+    controlling which colors of each pixel are copied.
+    (See handout for details)
+    """
+    # copy image to out
+    for y in range(top,image.height + top):
+        for x in range(left, image.width + left):
+
+            # define source coordinates
+            x_source = x - left
+            y_source = y - top
+
+            # define pixel and pixel_out
+            pixel = image.get_pixel(x_source,y_source)
+            pixel_out = out.get_pixel(x, y)
+
+            # color based on mode
+            if mode == 'all':
+                pixel_out.red = pixel.red
+                pixel_out.green = pixel.green
+                pixel_out.blue = pixel.blue
+            elif mode == 'red':
+                pixel_out.red = pixel.red
+            elif mode == 'green':
+                pixel_out.green = pixel.green
+            elif mode == 'blue':
+                pixel_out.blue = pixel.blue
+
+    return out
+
+  # define terms
+    image = SimpleImage('poppy.jpg')
+    left = 40
+    top = 20
+    out = SimpleImage.blank(image.width + 2 * left,image.height + 2 * top)
+    mode = 'all'
+
+    result = draw_image(image, out, left, top, mode)
+    result.show()
