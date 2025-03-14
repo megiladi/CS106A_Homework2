@@ -1,0 +1,69 @@
+# Attempt 1
+
+def reflect(filename):
+    image = SimpleImage(filename)
+    
+    # Create out image with 2x the height
+    out = SimpleImage.blank(image.width,image.height*2)
+    
+    # Copy original to top half of out
+    for y in range(image.height):
+        for x in range(image.width):
+            pixel = image.get_pixel(x,y)
+            out.set_pixel(x,y,pixel)
+    
+    # Copy original to bottom half of out, vertically flipped
+    for y in range(image.height):
+        for x in range(image.width):
+            pixel = image.get_pixel(x,y)
+            out.set_pixel(x,image.height*2-y-1,pixel)
+    
+    return out    
+
+# Attempt 2 - Changed from "out.set_pixel" to "out_pixel = out.get_pixel"
+
+def reflect(filename):
+    image = SimpleImage(filename)
+    
+    # Create out image with 2x the height
+    out = SimpleImage.blank(image.width,image.height*2)
+    
+    # Copy original to top half of out
+    for y in range(image.height):
+        for x in range(image.width):
+            pixel = image.get_pixel(x,y)
+            out_pixel = out.get_pixel(x,y,pixel)
+    
+    # Copy original to bottom half of out, vertically flipped
+    for y in range(image.height):
+        for x in range(image.width):
+            pixel = image.get_pixel(x,y)
+            out_pixel = out.get_pixel(x,image.height*2-y-1,pixel)
+    return out   
+
+# Attempt 3 - Replaced "out.get_pixel(x,y,pixel)" with "out.get_pixel(x,y)" and then the .red, etc. in the lines below
+
+def reflect(filename):
+    image = SimpleImage(filename)
+    
+    # Create out image with 2x the height
+    out = SimpleImage.blank(image.width,image.height*2)
+    
+    # Copy original to top half of out
+    for y in range(image.height):
+        for x in range(image.width):
+            pixel = image.get_pixel(x,y)
+            pixel_out = out.get_pixel(x,y)
+            pixel_out.red = pixel.red
+            pixel_out.green = pixel.green
+            pixel_out.blue = pixel.blue
+    
+    # Copy original to bottom half of out, vertically flipped
+    for y in range(image.height):
+        for x in range(image.width):
+            pixel = image.get_pixel(x,y)
+            pixel_out = out.get_pixel(x,image.height*2-y-1)
+            pixel_out.red = pixel.red
+            pixel_out.green = pixel.green
+            pixel_out.blue = pixel.blue
+    return out    
