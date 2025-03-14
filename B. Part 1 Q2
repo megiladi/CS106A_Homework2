@@ -1,0 +1,62 @@
+# Attempt 1
+
+def hat(filename, n):
+    image = SimpleImage(filename)
+    out = SimpleImage.blank(image.width,image.height+n)
+    for y in range(n): # n high
+        for x in range(image.width):
+            pixel = image.get_pixel(x,y)
+            pixel_out = out.get_pixel (x,y)
+            pixel_out.red = 255
+            pixel_out.green = 255
+            pixel_out.blue = 0
+    for y in range(n+1:image.height+n+1): # starts after n high; +1 on RHS to overcome UBNI and reach fully
+        for x in range(image.width):
+            pixel = image.get_pixel(x,y)
+            pixel_out = out.get_pixel (x,y)
+            pixel_out.red = pixel.red
+            pixel_out.green = pixel.green
+            pixel_out.blue = pixel.blue
+    return out
+
+# Attempt 2 - Corrected syntax for line 34
+
+def hat(filename, n):
+    image = SimpleImage(filename)
+    out = SimpleImage.blank(image.width,image.height+n)
+    for y in range(n): # n high
+        for x in range(image.width):
+            pixel = image.get_pixel(x,y)
+            pixel_out = out.get_pixel (x,y)
+            pixel_out.red = 255
+            pixel_out.green = 255
+            pixel_out.blue = 0
+    for y in range(n,image.height+n): # starts after n high; +1 on RHS to overcome UBNI and reach fully
+        for x in range(image.width):
+            pixel = image.get_pixel(x,y)
+            pixel_out = out.get_pixel (x,y)
+            pixel_out.red = pixel.red
+            pixel_out.green = pixel.green
+            pixel_out.blue = pixel.blue
+    return out
+
+# Attempt 3 - Added "-n" to line 57
+
+def hat(filename, n):
+    image = SimpleImage(filename)
+    out = SimpleImage.blank(image.width,image.height+n)
+    for y in range(n): # n high
+        for x in range(image.width):
+            pixel = image.get_pixel(x,y)
+            pixel_out = out.get_pixel (x,y)
+            pixel_out.red = 255
+            pixel_out.green = 255
+            pixel_out.blue = 0
+    for y in range(n,image.height+n): # starts after n high; +1 on RHS to overcome UBNI and reach fully
+        for x in range(image.width):
+            pixel = image.get_pixel(x,y-n)
+            pixel_out = out.get_pixel (x,y)
+            pixel_out.red = pixel.red
+            pixel_out.green = pixel.green
+            pixel_out.blue = pixel.blue
+    return out
